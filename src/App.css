@@ -302,8 +302,10 @@ footer p {
   text-align: center;
   margin-bottom: 60px;
 }
-.muse-logo {
-  width: 100px;
+.welcome-title img {
+  height: 85px;
+  width: auto;
+  vertical-align: middle;
 }
 
 .welcome-subtitle {
@@ -492,6 +494,10 @@ footer p {
     font-size: 60px;
   }
 
+  .welcome-title img {
+    height: 60px;
+  }
+
   .discover-title {
     font-size: 48px;
   }
@@ -535,6 +541,10 @@ footer p {
 
   .welcome-title {
     font-size: 40px;
+  }
+
+  .welcome-title img {
+    height: 40px;
   }
 
   .discover-preview-section {
@@ -612,6 +622,9 @@ footer p {
     font-size: 32px;
   }
 
+  .welcome-title img {
+    height: 32px;
+  }
 
   .discover-title {
     font-size: 30px;
