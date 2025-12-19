@@ -1,46 +1,56 @@
-function NavBar({ currentPage, onPageChange }) {
+import { Link, useLocation } from 'react-router-dom'
+
+function NavBar() {
+  const location = useLocation();
+  
   return (
     <header>
-      <img src="https://i.postimg.cc/sX9qvDP1/DISC-Project-Muse.png" alt="Muse Logo" />
+      <Link to="/">
+        <img src="https://i.postimg.cc/qRf5GrN5/DISC-Project-Muse-(1).png" alt="Muse Logo" />
+      </Link>
       <nav>
         <ul>
+        <li>
+            <Link 
+              to="/#" 
+              className={location.pathname === '/#' ? 'active' : ''}
+            >
+              home
+            </Link>
+          </li>
           <li>
-            <a 
-              href="#" 
-              className={currentPage === 'discover' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); onPageChange('discover'); }}
+            <Link 
+              to="/discover" 
+              className={location.pathname === '/discover' ? 'active' : ''}
             >
               discover
-            </a>
+            </Link>
           </li>
           <li>
-            <a 
-              href="#" 
-              className={currentPage === 'saved' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); onPageChange('saved'); }}
+            <Link 
+              to="/saved" 
+              className={location.pathname === '/saved' ? 'active' : ''}
             >
               saved
-            </a>
+            </Link>
           </li>
           <li>
-            <a 
-              href="#" 
-              className={currentPage === 'profile' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); onPageChange('profile'); }}
+            <Link 
+              to="/profile" 
+              className={location.pathname === '/profile' ? 'active' : ''}
             >
               profile
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
       <div className="profile-icon">
-        <a href="#">
+        <Link to="/logout">
           <img src="https://i.postimg.cc/qhqjFr5T/Material-Symbols-Logout-Icon.png" alt="Logout Icon" />
-        </a>
+        </Link>
       </div>
     </header>
   );
 }
 
 export default NavBar;
-
