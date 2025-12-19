@@ -19,7 +19,7 @@ function Landing() {
 
       <section className="welcome-section">
         <h2 className="welcome-title">
-          welcome to <img className = "muse-logo" src="https://i.postimg.cc/qRf5GrN5/DISC-Project-Muse-(1).png" alt="Muse Logo" />
+          welcome to <img className="muse-logo" src="https://i.postimg.cc/qRf5GrN5/DISC-Project-Muse-(1).png" alt="Muse Logo" />
         </h2>
         <p className="welcome-subtitle">skip the small talk. . .</p>
         <p className="welcome-tagline">just pick up an earbud</p>
