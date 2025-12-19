@@ -1,42 +1,210 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Header Styles */
+header {
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header img {
+  height: 40px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+
+nav a {
+  color: #999;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+
+.profile-icon img {
+  height: 24px;
+  width: 24px;
+}
+
+/* Main Content */
+main {
+  padding: 20px 50px;
+}
+
+.discover-section h1 {
+  font-size: 80px;
+  font-weight: 700;
+  background: linear-gradient(to right, #4ade80, #8319f9, #3b82f6); /* Green to Specific Purple to Blue */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 40px 0;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Filters */
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 40px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-bar {
+  flex: 1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.search-bar input,
+.dropdown select {
+  width: 100%;
+  padding: 15px;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
 }
 
-.card {
-  padding: 2em;
+.search-bar input::placeholder {
+  color: #666;
 }
 
-.read-the-docs {
-  color: #888;
+.search-bar input:focus,
+.dropdown select:focus {
+  outline: none;
+  border-color: #444;
 }
+
+.dropdown select option {
+  background: #0a0a0a;
+}
+
+/* Profiles Grid */
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #999;
+  padding: 40px;
+  font-size: 16px;
+}
+
+/* Profile Card */
+.profile-card {
+  background: #0a0a0a;
+  border-radius: 12px;
+  border: 1px solid #1a1a1a;
+  overflow: hidden;
+}
+
+
+.profile-picture {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card Content */
+.card-content {
+  padding: 25px;
+}
+
+.card-content h2 {
+  font-size: 20px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.major {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 15px;
+}
+
+.bio {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #ccc;
+  margin: 15px 0 20px;
+}
+
+.card-content h3 {
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Top Artists */
+.top-artists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.top-artists span {
+  padding: 4px 12px;
+  background: linear-gradient(to right, rgba(131, 25, 249, 0.2), rgba(59, 130, 246, 0.2));
+  backdrop-filter: blur(4px);
+  border-radius: 9999px;
+  color: #fff;
+  font-size: 14px;
+  border: 1px solid rgba(131, 25, 249, 0.3);
+  transition: all 0.3s;
+}
+
+/* Connect Button */
+.connect-btn {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+
+.connect-btn.connected {
+  background: #1a1a1a;
+  border-color: #4ade80;
+  color: #4ade80;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid #1a1a1a;
+  margin-top: 60px;
+  padding: 40px 50px;
+  text-align: center;
+}
+
+footer img {
+  height: 40px;
+  margin-bottom: 15px;
+}
+
+footer p {
+  color: #999;
+  margin: 15px 0 20px;
+  font-size: 14px;
+}
+
