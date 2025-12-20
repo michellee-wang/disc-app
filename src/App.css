@@ -462,6 +462,34 @@ footer p {
 /* Responsive Design */
 /* Tablet and smaller screens */
 @media (max-width: 1024px) {
+  header {
+    padding: 20px 40px;
+  }
+
+  nav ul {
+    gap: 25px;
+  }
+
+  main {
+    padding: 20px 40px;
+  }
+
+  footer {
+    padding: 20px 40px;
+  }
+
+  .profiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .filters {
+    gap: 12px;
+  }
+
+  .discover-section h1 {
+    font-size: 65px;
+  }
   .headphones-icon {
     width: 200px;
     height: 200px;
@@ -513,6 +541,75 @@ footer p {
 
 /* Mobile screens */
 @media (max-width: 768px) {
+  /* Header and Navigation */
+  header {
+    padding: 15px 25px;
+    flex-wrap: wrap;
+  }
+
+  header img {
+    height: 32px;
+  }
+
+  nav ul {
+    gap: 20px;
+    font-size: 14px;
+  }
+
+  .profile-icon img {
+    height: 20px;
+    width: 20px;
+  }
+
+  /* Main content */
+  main {
+    padding: 15px 25px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 15px 25px;
+  }
+
+  footer img {
+    height: 32px;
+  }
+
+  footer p {
+    font-size: 14px;
+  }
+
+  /* Discover page */
+  .discover-section h1 {
+    font-size: 52px;
+    margin: 30px 0;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .search-bar input,
+  .dropdown select {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  /* Profile cards */
+  .profile-picture {
+    height: 250px;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-content h2 {
+    font-size: 18px;
+  }
+
+  /* Landing page elements */
   .headphones-icon {
     width: 120px;
     height: 120px;
@@ -535,6 +632,10 @@ footer p {
     font-size: 40px;
   }
 
+  .hero-subtitle {
+    font-size: 20px;
+  }
+
   .welcome-section {
     padding: 60px 30px;
   }
@@ -547,14 +648,35 @@ footer p {
     height: 40px;
   }
 
+  .welcome-subtitle {
+    font-size: 32px;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .welcome-tagline {
+    font-size: 32px;
+    text-align: center;
+    margin-right: 0;
+  }
+
   .discover-preview-section {
     flex-direction: column;
     padding: 60px 30px;
+    padding-right: 30px;
     gap: 40px;
+  }
+
+  .discover-text {
+    text-align: center;
   }
 
   .discover-title {
     font-size: 36px;
+  }
+
+  .discover-subtitle {
+    font-size: 18px;
   }
 
   .profile-card-image {
@@ -562,15 +684,20 @@ footer p {
   }
 
   .cta-section {
-    padding: 60px 30px;
+    padding: 60px 20px;
   }
 
   .cta-title {
     font-size: 36px;
+    text-align: center;
   }
 
   .taylor-swift-photo {
     display: none;
+  }
+
+  .cta-content {
+    justify-content: center;
   }
 
   .cta-button {
@@ -600,6 +727,93 @@ footer p {
 
 /* Small mobile screens */
 @media (max-width: 480px) {
+  /* Header and Navigation */
+  header {
+    padding: 12px 15px;
+    gap: 10px;
+  }
+
+  header img {
+    height: 28px;
+  }
+
+  nav ul {
+    gap: 8px;
+    font-size: 11px;
+  }
+
+  nav a {
+    white-space: nowrap;
+  }
+
+  .profile-icon img {
+    height: 18px;
+    width: 18px;
+  }
+
+  /* Main content */
+  main {
+    padding: 12px 15px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 12px 15px;
+  }
+
+  footer img {
+    height: 28px;
+  }
+
+  footer p {
+    font-size: 12px;
+    margin: 10px 0 15px;
+  }
+
+  /* Discover page */
+  .discover-section h1 {
+    font-size: 42px;
+    margin: 25px 0;
+  }
+
+  .filters {
+    gap: 10px;
+  }
+
+  .search-bar input,
+  .dropdown select {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  /* Profile cards */
+  .profile-picture {
+    height: 200px;
+  }
+
+  .card-content {
+    padding: 18px;
+  }
+
+  .card-content h2 {
+    font-size: 16px;
+  }
+
+  .bio {
+    font-size: 12px;
+  }
+
+  .top-artists span {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .connect-btn {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  /* Landing page elements */
   .headphones-icon {
     width: 80px;
     height: 80px;
@@ -614,40 +828,150 @@ footer p {
     top: 150px;
   }
 
+  .hero-section {
+    padding: 50px 20px;
+  }
+
   .hero-title {
     font-size: 32px;
   }
 
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .welcome-section {
+    padding: 50px 20px;
+  }
+
   .welcome-title {
     font-size: 32px;
+    margin-bottom: 40px;
   }
 
   .welcome-title img {
     height: 32px;
   }
 
+  .welcome-subtitle {
+    font-size: 24px;
+    text-align: center;
+    margin-left: 0;
+    margin-bottom: 15px;
+  }
+
+  .welcome-tagline {
+    font-size: 24px;
+    text-align: center;
+    margin-right: 0;
+  }
+
+  .discover-preview-section {
+    padding: 40px 20px;
+    padding-right: 20px;
+    gap: 30px;
+  }
+
+  .discover-text {
+    text-align: center;
+  }
+
   .discover-title {
-    font-size: 30px;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .discover-subtitle {
+    font-size: 16px;
+  }
+
+  .cta-section {
+    padding: 40px 15px;
   }
 
   .cta-title {
     font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
   }
 
+  .cta-button {
+    padding: 12px 30px;
+    font-size: 18px;
+  }
+
+  /* Adjust spotlight gradients for small mobile */
+  .landing-page::before {
+    width: 300px;
+    height: 300px;
+    left: -40%;
+  }
+
+  .landing-page::after {
+    width: 350px;
+    height: 350px;
+    right: -40%;
+  }
+}
+
+/* Extra small mobile screens */
+@media (max-width: 360px) {
   header {
-    padding: 15px 20px;
+    padding: 10px 12px;
+  }
+
+  header img {
+    height: 24px;
+  }
+
+  nav ul {
+    gap: 6px;
+    font-size: 10px;
+  }
+
+  .profile-icon img {
+    height: 16px;
+    width: 16px;
   }
 
   main {
-    padding: 15px 20px;
+    padding: 10px 12px;
   }
 
   footer {
-    padding: 15px 20px;
+    padding: 10px 12px;
   }
 
   .discover-section h1 {
-    font-size: 48px;
+    font-size: 36px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .welcome-title {
+    font-size: 28px;
+  }
+
+  .welcome-title img {
+    height: 28px;
+  }
+
+  .welcome-subtitle {
+    font-size: 20px;
+  }
+
+  .welcome-tagline {
+    font-size: 20px;
+  }
+
+  .discover-title {
+    font-size: 24px;
+  }
+
+  .cta-title {
+    font-size: 24px;
   }
 }
 

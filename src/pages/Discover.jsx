@@ -47,7 +47,7 @@ function Discover() {
 
         const data = await response.json();
         
-        // database includes topp artists for each user
+        // database includes top artists for each user
         // const usersWithArtists = data.map(user => ({
         //   ...user,
         //   topArtists: getRandomArtists()
