@@ -2,28 +2,27 @@ import { useState, useEffect } from 'react'
 import ProfileCard from '../components/ProfileCard'
 import Loading from '../components/Loading'
 
-const API_BASE_URL = 'https://disc-assignment-5-users-api-iyct.onrender.com';
+// const API_BASE_URL = 'https://disc-assignment-5-users-api-iyct.onrender.com';
+const API_BASE_URL = 'http://localhost:3001';
 
-// since an API call doesnt have data for artists we will temoporarily generate random artists for each user
-// top 50 popular artists
-const TOP_ARTISTS = [
-  'Taylor Swift', 'Drake', 'Bad Bunny', 'The Weeknd', 'Ariana Grande',
-  'Billie Eilish', 'Ed Sheeran', 'Post Malone', 'Travis Scott', 'Dua Lipa',
-  'Olivia Rodrigo', 'Harry Styles', 'Justin Bieber', 'SZA', 'Morgan Wallen',
-  'Kanye West', 'Eminem', 'Rihanna', 'BTS', 'Doja Cat',
-  'Kendrick Lamar', 'Bruno Mars', 'Adele', 'Lady Gaga', 'Selena Gomez',
-  'Shawn Mendes', 'J. Cole', 'Cardi B', 'Lil Baby', 'Tyler, The Creator',
-  'Frank Ocean', 'Daniel Caesar', 'Keshi', 'Sabrina Carpenter', 'Chappell Roan',
-  'Zach Bryan', 'Noah Kahan', 'Hozier', 'Beyoncé', 'Metro Boomin',
-  '21 Savage', 'Future', 'Lana Del Rey', 'Arctic Monkeys', 'The Neighbourhood',
-  'Mac Miller', 'Childish Gambino', 'Khalid', 'Rex Orange County', 'PARTYNEXTDOOR'
-];
+// NOTE: Random artist generation commented out - now fetching from database
+// const TOP_ARTISTS = [
+//   'Taylor Swift', 'Drake', 'Bad Bunny', 'The Weeknd', 'Ariana Grande',
+//   'Billie Eilish', 'Ed Sheeran', 'Post Malone', 'Travis Scott', 'Dua Lipa',
+//   'Olivia Rodrigo', 'Harry Styles', 'Justin Bieber', 'SZA', 'Morgan Wallen',
+//   'Kanye West', 'Eminem', 'Rihanna', 'BTS', 'Doja Cat',
+//   'Kendrick Lamar', 'Bruno Mars', 'Adele', 'Lady Gaga', 'Selena Gomez',
+//   'Shawn Mendes', 'J. Cole', 'Cardi B', 'Lil Baby', 'Tyler, The Creator',
+//   'Frank Ocean', 'Daniel Caesar', 'Keshi', 'Sabrina Carpenter', 'Chappell Roan',
+//   'Zach Bryan', 'Noah Kahan', 'Hozier', 'Beyoncé', 'Metro Boomin',
+//   '21 Savage', 'Future', 'Lana Del Rey', 'Arctic Monkeys', 'The Neighbourhood',
+//   'Mac Miller', 'Childish Gambino', 'Khalid', 'Rex Orange County', 'PARTYNEXTDOOR'
+// ];
 
-// function to get 3 random artists
-function getRandomArtists() {
-  const shuffled = [...TOP_ARTISTS].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 3);
-}
+// function getRandomArtists() {
+//   const shuffled = [...TOP_ARTISTS].sort(() => Math.random() - 0.5);
+//   return shuffled.slice(0, 3);
+// }
 
 function Discover() {
   // state management
@@ -42,24 +41,27 @@ function Discover() {
       try {
         setLoading(true);
 
-        const response = await fetch(`${API_BASE_URL}/api/users`);
+        
+        // const response = await fetch(`${API_BASE_URL}/api/users`);
+        const response = await fetch(`${API_BASE_URL}/users`);
+
         const data = await response.json();
         
-        // adding the randomly generated top artists to each user
-        const usersWithArtists = data.map(user => ({
-          ...user,
-          topArtists: getRandomArtists()
-        }));
+        // database includes topp artists for each user
+        // const usersWithArtists = data.map(user => ({
+        //   ...user,
+        //   topArtists: getRandomArtists()
+        // }));
         
-        setProfiles(usersWithArtists);
+        setProfiles(data);
         
         // extract the majors from the fetched users for filtering dropdown
         const majors = [...new Set(data.map(user => user.major).filter(major => major))];
         setAvailableMajors(majors.sort());
         
-        // extract the majors from the fetched users for filtering dropdown
-        const years = [...new Set(data.map(user => String(user.graduationYear)).filter(year => year && year !== 'undefined' && year !== 'null'))];
-        setAvailableGraduationYears(years.sort());
+        // extract the graduation years from the fetched users for filtering dropdown
+        const years = [...new Set(data.map(user => user.graduationYear).filter(year => year && year !== 'undefined' && year !== 'null'))];
+        setAvailableGraduationYears(years.sort((a, b) => Number(a) - Number(b)));
       } finally {
         setLoading(false);
       }
@@ -75,7 +77,7 @@ function Discover() {
                          profile.bio.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesMajor = selectedMajor === 'All Majors' || profile.major === selectedMajor;
     const matchesGraduationYear = selectedGraduationYear === 'All Graduation Years' || 
-                                  String(profile.graduationYear) === String(selectedGraduationYear);
+                                  profile.graduationYear == selectedGraduationYear;
     
     return matchesSearch && matchesMajor && matchesGraduationYear;
   });
