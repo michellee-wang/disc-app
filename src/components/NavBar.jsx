@@ -1,7 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 function NavBar() {
   const location = useLocation();
+  const { isLoggedIn, logout } = useAuth();
   
   return (
     <header>
@@ -12,8 +14,8 @@ function NavBar() {
         <ul>
         <li>
             <Link 
-              to="/#" 
-              className={location.pathname === '/#' ? 'active' : ''}
+              to="/" 
+              className={location.pathname === '/' ? 'active' : ''}
             >
               home
             </Link>
@@ -26,29 +28,54 @@ function NavBar() {
               discover
             </Link>
           </li>
-          <li>
-            <Link 
-              to="/saved" 
-              className={location.pathname === '/saved' ? 'active' : ''}
-            >
-              saved
-            </Link>
-          </li>
-          <li>
-            <Link 
-              to="/profile" 
-              className={location.pathname === '/profile' ? 'active' : ''}
-            >
-              profile
-            </Link>
-          </li>
+          {isLoggedIn ? (
+            <>
+              <li>
+                <Link 
+                  to="/saved" 
+                  className={location.pathname === '/saved' ? 'active' : ''}
+                >
+                  saved
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/profile" 
+                  className={location.pathname === '/profile' ? 'active' : ''}
+                >
+                  profile
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link 
+                  to="/login" 
+                  className={location.pathname === '/login' ? 'active' : ''}
+                >
+                  login
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/signup" 
+                  className={location.pathname === '/signup' ? 'active' : ''}
+                >
+                  signup
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
-      <div className="profile-icon">
-        <Link to="/logout">
-          <img src="https://i.postimg.cc/qhqjFr5T/Material-Symbols-Logout-Icon.png" alt="Logout Icon" />
-        </Link>
-      </div>
+      {isLoggedIn && (
+        <div className="profile-icon">
+          <Link to="/logout">
+            <img src="https://i.postimg.cc/qhqjFr5T/Material-Symbols-Logout-Icon.png" alt="Logout Icon" />
+          </Link>
+        </div>
+      )}
     </header>
   );
 }
