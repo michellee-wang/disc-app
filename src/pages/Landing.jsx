@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
 import CardExample from '../assets/DISC Project Group 1 (1).png'
 import taylorSwiftPhoto from '../assets/DISC Project Image 1.png'
 import headphones from '../assets/DISC Project Frame.png'
 import musicNote from '../assets/Vector from DISC Project.png'
 
 function Landing() {
-  const { isLoggedIn } = useAuth();
 
   return (
     <div className="landing-page">

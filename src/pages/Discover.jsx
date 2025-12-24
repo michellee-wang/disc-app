@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useAuth } from '../context/AuthContext'
 import ProfileCard from '../components/ProfileCard'
 import Loading from '../components/Loading'
 
@@ -34,19 +35,17 @@ function Discover() {
   const [loading, setLoading] = useState(true);
   const [availableMajors, setAvailableMajors] = useState([]);
   const [availableGraduationYears, setAvailableGraduationYears] = useState([]);
+  const { user: currentUser } = useAuth();
 
   // when the component mounts, uses the api to fetch users
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-
-        
         // const response = await fetch(`${API_BASE_URL}/api/users`);
         const response = await fetch(`${API_BASE_URL}/users`);
-
         const data = await response.json();
-        
+
         // database includes top artists for each user
         // const usersWithArtists = data.map(user => ({
         //   ...user,
@@ -54,13 +53,12 @@ function Discover() {
         // }));
         
         setProfiles(data);
-        
         // extract the majors from the fetched users for filtering dropdown
         const majors = [...new Set(data.map(user => user.major).filter(major => major))];
         setAvailableMajors(majors.sort());
         
         // extract the graduation years from the fetched users for filtering dropdown
-        const years = [...new Set(data.map(user => user.graduationYear).filter(year => year && year !== 'undefined' && year !== 'null'))];
+        const years = [...new Set(data.map(user => user.graduation_year || user.graduationYear).filter(year => year && year !== 'undefined' && year !== 'null'))];
         setAvailableGraduationYears(years.sort((a, b) => Number(a) - Number(b)));
       } finally {
         setLoading(false);
@@ -72,12 +70,24 @@ function Discover() {
 
   // Filter profiles based on search and filters
   const filteredProfiles = profiles.filter(profile => {
-    const fullName = `${profile.firstName} ${profile.lastName}`.toLowerCase();
+    // exclude the current logged-in user's profile
+    if (currentUser && profile.email && currentUser.email && 
+        profile.email.toLowerCase() === currentUser.email.toLowerCase()) {
+      return false;
+    }
+
+    const firstName = profile.first_name || profile.firstName || '';
+    const lastName = profile.last_name || profile.lastName || '';
+    const fullName = `${firstName} ${lastName}`.toLowerCase();
+    const bio = profile.bio || '';
+    const major = profile.major || '';
+    const graduationYear = profile.graduation_year || profile.graduationYear;
+
     const matchesSearch = fullName.includes(searchQuery.toLowerCase()) ||
-                         profile.bio.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesMajor = selectedMajor === 'All Majors' || profile.major === selectedMajor;
+                         bio.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesMajor = selectedMajor === 'All Majors' || major === selectedMajor;
     const matchesGraduationYear = selectedGraduationYear === 'All Graduation Years' || 
-                                  profile.graduationYear == selectedGraduationYear;
+                                  graduationYear == selectedGraduationYear;
     
     return matchesSearch && matchesMajor && matchesGraduationYear;
   });
@@ -100,7 +110,7 @@ function Discover() {
     }
   }, [searchQuery, filteredProfiles.length]);
 
-  // Show loading screen
+  // loading state
   if (loading) {
     return <Loading />;
   }
