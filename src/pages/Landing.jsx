@@ -5,6 +5,7 @@ import headphones from '../assets/DISC Project Frame.png'
 import musicNote from '../assets/Vector from DISC Project.png'
 
 function Landing() {
+
   return (
     <div className="landing-page">
       <section className="hero-section">
