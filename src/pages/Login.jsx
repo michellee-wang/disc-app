@@ -31,8 +31,23 @@ function Login() {
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
       }
-      const userToStore = data.session.user || { email };
-      login(userToStore, data.session);
+      
+      const usersResponse = await fetch(`${API_BASE_URL}/users`);
+      if (usersResponse.ok) {
+        const allUsers = await usersResponse.json();
+        const fullProfile = allUsers.find(u => 
+          u.email && email && 
+          u.email.toLowerCase() === email.toLowerCase()
+        );
+        
+        if (fullProfile) {
+          login(fullProfile, data.session);
+        } else {
+          login(data.session.user || { email }, data.session);
+        }
+      } else {
+        login(data.session.user || { email }, data.session);
+      }
 
       navigate('/discover');
     } catch (err) {

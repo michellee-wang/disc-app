@@ -103,17 +103,35 @@ function Signup() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
 
-      if (data.session) {
+      const usersResponse = await fetch(`${API_BASE_URL}/users`);
+      if (usersResponse.ok) {
+        const allUsers = await usersResponse.json();
+        const fullProfile = allUsers.find(u => 
+          u.email && userData.email && 
+          u.email.toLowerCase() === userData.email.toLowerCase()
+        );
+        
+        if (fullProfile) {
+          login(fullProfile, data.session);
+        } else {
+          const userToStore = {
+            ...(data.user || {}),
+            ...userData,
+            topArtists: spotifyData.topArtists
+          };
+          login(userToStore, data.session);
+        }
+      } else {
         const userToStore = {
-          ...(data.session.user || {}),
+          ...(data.user || {}),
           ...userData,
           topArtists: spotifyData.topArtists
         };
-        
         login(userToStore, data.session);
-        localStorage.removeItem('pendingSignup');
-        navigate('/discover');
       }
+      
+      localStorage.removeItem('pendingSignup');
+      navigate('/discover');
     } catch (err) {
       setError(err.message);
       localStorage.removeItem('pendingSignup');

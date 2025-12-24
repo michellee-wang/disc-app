@@ -197,7 +197,9 @@ main > article {
 }
 
 .profiles-grid {
-  max-width: none;
+  max-width: 1400px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 350px));
+  justify-content: center;
 }
 
 .no-results {

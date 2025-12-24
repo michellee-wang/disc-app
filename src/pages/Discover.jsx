@@ -68,6 +68,25 @@ function Discover() {
     fetchUsers();
   }, []);
 
+  useEffect(() => {
+    const fetchSavedUsers = async () => {
+      if (!currentUser || !currentUser.id) return;
+      
+      try {
+        const response = await fetch(`${API_BASE_URL}/users/${currentUser.id}/saved`);
+        if (response.ok) {
+          const savedUsers = await response.json();
+          const savedUserIds = savedUsers.map(user => user.id);
+          setConnectedProfiles(savedUserIds);
+        }
+      } catch (error) {
+        console.error('Error fetching saved users:', error);
+      }
+    };
+
+    fetchSavedUsers();
+  }, [currentUser]);
+
   // Filter profiles based on search and filters
   const filteredProfiles = profiles.filter(profile => {
     // exclude the current logged-in user's profile
@@ -92,10 +111,40 @@ function Discover() {
     return matchesSearch && matchesMajor && matchesGraduationYear;
   });
 
-  const handleConnect = (profileId) => {
-    setConnectedProfiles(prev => 
-      prev.includes(profileId) ? prev : [...prev, profileId]
-    );
+  const handleConnect = async (profileId) => {
+    if (!currentUser || !currentUser.id) {
+      console.error('No current user found');
+      return;
+    }
+
+    // Check if already saved
+    if (connectedProfiles.includes(profileId)) {
+      console.log('User already saved');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/users/save`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: currentUser.id,
+          savedUserId: profileId
+        })
+      });
+
+      if (response.ok) {
+        setConnectedProfiles(prev => [...prev, profileId]);
+        console.log('User saved successfully');
+      } else {
+        const error = await response.json();
+        console.error('Failed to save user:', error);
+      }
+    } catch (error) {
+      console.error('Error saving user:', error);
+    }
   };
 
   useEffect(() => {

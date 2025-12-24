@@ -46,9 +46,6 @@ function ProfileCard({ profile, isConnected, onConnect, showSaveButton = true, s
             <p className="user-information-text">
               <strong>Email:</strong> {profile.email}
             </p>
-            <p className="user-information-text">
-              <strong>Major:</strong> {profile.major}
-            </p>
           </div>
         )
         }
