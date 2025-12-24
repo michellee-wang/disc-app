@@ -76,7 +76,7 @@ function NavBar() {
         </ul>
       </nav>
       {isLoggedIn && (
-        <button onClick={handleLogout} className="logout-btn">
+        <button onClick={handleLogout}>
           <img src="https://i.postimg.cc/qhqjFr5T/Material-Symbols-Logout-Icon.png" alt="Logout Icon" />
         </button>
       )}

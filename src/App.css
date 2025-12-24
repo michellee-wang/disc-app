@@ -50,8 +50,6 @@ select:focus {
 }
 
 button {
-  width: 100%;
-  padding: 0.75rem;
   background: transparent;
   border: 1px solid #333;
   border-radius: 8px;
@@ -59,6 +57,7 @@ button {
   cursor: pointer;
   font-size: 0.875rem;
   transition: transform 0.2s, opacity 0.2s;
+  padding: 0.75rem;
 }
 
 button:hover:not(:disabled) {
@@ -110,6 +109,18 @@ nav a {
 
 nav a.active {
   color: white;
+}
+
+header button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: auto;
+}
+
+header button img {
+  height: 24px;
+  width: 24px;
 }
 
 .profile-icon img {
@@ -176,10 +187,17 @@ nav a.active {
 }
 
 /* layouts for grid */
-.profiles-grid {
+.profiles-grid,
+main > article {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.profiles-grid {
+  max-width: none;
 }
 
 .no-results {
@@ -242,10 +260,23 @@ nav a.active {
   border: 1px solid rgba(131, 25, 249, 0.3);
 }
 
+.profile-card button {
+  width: 100%;
+}
+
 .connect-btn.connected {
   background: #1a1a1a;
   border-color: #4ade80;
   color: #4ade80;
+}
+
+.signup-form img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #a855f7;
+  margin-top: 0.625rem;
 }
 
 .user-information {
@@ -554,6 +585,7 @@ nav a.active {
   color: #a855f7;
   font-weight: 600;
 }
+
 
 /* size responsiveness */
 @media (max-width: 768px) {
