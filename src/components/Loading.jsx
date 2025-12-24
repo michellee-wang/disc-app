@@ -1,8 +1,10 @@
+import { ClipLoader } from 'react-spinners';
+
 function Loading() {
   return (
     <main>
       <div className="loading-container">
-        <div className="loading-spinner"></div>
+        <ClipLoader color="#8319f9" size={60} />
         <p className="loading-text">Loading. . .</p>
       </div>
     </main>

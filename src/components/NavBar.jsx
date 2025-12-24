@@ -1,9 +1,15 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 function NavBar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
   
   return (
     <header>
@@ -70,11 +76,9 @@ function NavBar() {
         </ul>
       </nav>
       {isLoggedIn && (
-        <div className="profile-icon">
-          <Link to="/logout">
-            <img src="https://i.postimg.cc/qhqjFr5T/Material-Symbols-Logout-Icon.png" alt="Logout Icon" />
-          </Link>
-        </div>
+        <button onClick={handleLogout} className="logout-btn">
+          <img src="https://i.postimg.cc/qhqjFr5T/Material-Symbols-Logout-Icon.png" alt="Logout Icon" />
+        </button>
       )}
     </header>
   );
