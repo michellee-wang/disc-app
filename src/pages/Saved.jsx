@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import ProfileCard from '../components/ProfileCard';
 import Loading from '../components/Loading';
 
-const API_BASE_URL = 'https://disc-users-api.onrender.com/';
+const API_BASE_URL = 'https://disc-users-api.onrender.com';
 
 function Saved() {
   const { user: currentUser } = useAuth();
