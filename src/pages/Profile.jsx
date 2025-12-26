@@ -18,7 +18,7 @@ function Profile() {
           return;
         }
         const currentUser = contextUser;
-                const response = await fetch(`http://localhost:3001/users`);
+                const response = await fetch(`https://disc-users-api.onrender.com/`);
         if (response.ok) {
           const allUsers = await response.json();
           // Find the user in the list by email (case-insensitive)

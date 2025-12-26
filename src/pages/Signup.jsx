@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const API_BASE_URL = 'http://localhost:3001';
+const API_BASE_URL = 'https://disc-users-api.onrender.com/';
 
 const SPOTIFY_CLIENT_ID = 'e3f801a24a46466399e47cc1b07a8b2c'; //this is fine if it's public
 const SPOTIFY_REDIRECT_URI = 'http://127.0.0.1:5173/signup'; // vite must be running on 127.0.0.1:5173
