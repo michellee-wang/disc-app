@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 const API_BASE_URL = 'https://disc-users-api.onrender.com';
 
 const SPOTIFY_CLIENT_ID = 'e3f801a24a46466399e47cc1b07a8b2c'; //this is fine if it's public
-const SPOTIFY_REDIRECT_URI = 'https://disc-app-five.vercel.app/discover'; // vite must be running on 127.0.0.1:5173
+const SPOTIFY_REDIRECT_URI = 'https://disc-app-five.vercel.app/signup'; // vite must be running on 127.0.0.1:5173
 const SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/authorize';
 const SPOTIFY_SCOPES = 'user-top-read';
 
