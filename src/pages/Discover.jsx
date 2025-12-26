@@ -4,7 +4,7 @@ import ProfileCard from '../components/ProfileCard'
 import Loading from '../components/Loading'
 
 // const API_BASE_URL = 'https://disc-assignment-5-users-api-iyct.onrender.com';
-const API_BASE_URL = 'http://localhost:3001';
+const API_BASE_URL = 'https://disc-users-api.onrender.com/';
 
 // NOTE: Random artist generation commented out - now fetching from database
 // const TOP_ARTISTS = [

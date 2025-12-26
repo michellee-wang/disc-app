@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const API_BASE_URL = 'http://localhost:3001';
+const API_BASE_URL = 'https://disc-users-api.onrender.com/';
 
 function Login() {
   const [email, setEmail] = useState('');
