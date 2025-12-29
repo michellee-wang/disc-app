@@ -1,17 +1,41 @@
-# React + Vite
+# muse 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+muse is a social networking platform that connects people through their music taste. built with React and powered by Spotify, users can discover others with similar musical interests, view their top artists, and save connections.
 
-Currently, two official plugins are available:
+## this was made for [disc club at nu](https://discnu.org)
+part of the assignment was to use a premade api to fetch users so the artists had to be randomly generated. this part was commmented out after supabase auth was added so that users can make their own account
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: [https://disc-app-five.vercel.app](https://disc-app-five.vercel.app)
+- **Backend API**: [https://disc-users-api.onrender.com](https://disc-users-api.onrender.com)
 
-## React Compiler
+## Features
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **Spotify Integration**: Sign up and login using Spotify OAuth
+- **Profile Pictures**: Automatic profile picture sync from Spotify
+- **Top Artists**: Display your top 3 artists from Spotify
+- **Discover Users**: Browse all users on the platform
+- **Save Connections**: Save users you're interested in connecting with
+- **User Profiles**: View your own profile with saved connections count
 
-## Expanding the ESLint configuration
+## backend
+- **Node.js + Express** - REST API
+- **Supabase** - Database and authentication
+- **Spotify Web API** - OAuth and user data
+- **CORS** - Cross-origin resource sharing
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# disc-app
+## API Endpoints
+
+### Authentication
+- `POST /auth/signup` - Create new user account
+- `POST /auth/login` - Login existing user
+
+### Users
+- `GET /users` - Get all users
+- `GET /users/:id/saved` - Get saved users for a specific user
+- `POST /users/save` - Save a user connection
+
+### Spotify
+- `POST /spotify/callback` - Exchange Spotify auth code for user data
+
+
+Made with ❤️ 
