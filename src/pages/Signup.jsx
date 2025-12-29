@@ -18,7 +18,6 @@ function Signup() {
   const [bio, setBio] = useState('');
   const [major, setMajor] = useState('');
   const [graduationYear, setGraduationYear] = useState('');
-  const [profilePicture, setProfilePicture] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [spotifyCode, setSpotifyCode] = useState(null);
@@ -54,24 +53,6 @@ function Signup() {
     }
   }, [searchParams]);
 
-
-  // limiting profile picture size because supabase can't handle large images
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      if (file.size > 1024 * 1024) { 
-        setError('Image must be smaller than 1MB');
-        return;
-      }
-      
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePicture(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const completeSignupWithSpotify = async (userData, code) => {
     setLoading(true);
     
@@ -88,10 +69,11 @@ function Signup() {
         throw new Error(spotifyData.error || 'Failed to connect Spotify');
       }
 
-      // now create account with Spotify top artists
+      // now create account with Spotify top artists and profile picture
       const signupData = { 
         ...userData,
-        topArtists: spotifyData.topArtists || []
+        topArtists: spotifyData.topArtists || [],
+        profilePicture: spotifyData.profilePicture || spotifyData.images?.[0]?.url || ''
       };
 
       const response = await fetch(`${API_BASE_URL}/auth/signup`, {
@@ -152,8 +134,7 @@ function Signup() {
       lastName,
       bio,
       major,
-      graduationYear: parseInt(graduationYear),
-      profilePicture
+      graduationYear: parseInt(graduationYear)
     };
 
     try {
@@ -259,26 +240,13 @@ function Signup() {
               placeholder="2029"
             />
           </div>
-          <div>
-            <label htmlFor="profilePicture">Profile Picture</label>
-            <input
-              id="profilePicture"
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="signup-file-input"
-            />
-            {profilePicture && (
-              <img 
-                src={profilePicture} 
-                alt="Preview" 
-              />
-            )}
-          </div>
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="signup-button" disabled={loading}>
-            {loading ? 'Creating account...' : 'Sign Up'}
+            {loading ? 'Creating account...' : 'Sign Up with Spotify'}
           </button>
+          <p className="signup-note" style={{ textAlign: 'center', marginTop: '10px', fontSize: '0.9em', color: '#666' }}>
+            Your Spotify profile picture will be used
+          </p>
         </form>
         <p className="signup-link">
           Already have an account? <Link to="/login">Login</Link>

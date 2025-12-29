@@ -3,7 +3,7 @@ function ProfileCard({ profile, isConnected, onConnect, showSaveButton = true, s
     ? `${profile.firstName} ${profile.lastName}` 
     : (profile.firstName || profile.lastName || 'Anonymous User');
   
-  const defaultProfilePic = 'https://via.placeholder.com/300x300?text=No+Image';
+  const defaultProfilePic = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_lvjjRAVDQ-nBDq_4dy1xCyRjjDaHV-Tqcw&s';
   
   return (
     <article className="profile-card">
