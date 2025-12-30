@@ -17,7 +17,18 @@ function ProfileCard({ profile, isConnected, onConnect, showSaveButton = true, s
         />
       </div>
       <div className="card-content">
-        <h2>{fullName}</h2>
+        {profile.spotifyUserId ? (
+          <a 
+            href={`https://open.spotify.com/user/${profile.spotifyUserId}`} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="profile-name-link"
+          >
+            <h2>{fullName}</h2>
+          </a>
+        ) : (
+          <h2>{fullName}</h2>
+        )}
         <p className="major">
           {profile.major}{profile.graduationYear ? ` • Class of ${profile.graduationYear}` : ''}
         </p>
@@ -26,9 +37,24 @@ function ProfileCard({ profile, isConnected, onConnect, showSaveButton = true, s
           <>
             <h3>TOP ARTISTS</h3>
             <div className="top-artists">
-              {profile.topArtists.map((artist, index) => (
-                <span key={index}>{artist}</span>
-              ))}
+              {profile.topArtists.map((artist, index) => {
+                const artistData = typeof artist === 'object' ? artist : { name: artist };
+                const artistUrl = artistData.id 
+                  ? `https://open.spotify.com/artist/${artistData.id}`
+                  : `https://open.spotify.com/search/${encodeURIComponent(artistData.name)}`;
+                
+                return (
+                  <a 
+                    key={index}
+                    href={artistUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="artist-link"
+                  >
+                    <span>{artistData.name || artist}</span>
+                  </a>
+                );
+              })}
             </div>
           </>
         )}

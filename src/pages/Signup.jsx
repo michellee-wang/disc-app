@@ -63,11 +63,17 @@ function Signup() {
         body: JSON.stringify({ code }),
       });
 
-      const spotifyData = await spotifyResponse.json();
-      
       if (!spotifyResponse.ok) {
-        throw new Error(spotifyData.error || 'Failed to connect Spotify');
+        const contentType = spotifyResponse.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const spotifyData = await spotifyResponse.json();
+          throw new Error(spotifyData.error || 'Failed to connect Spotify');
+        } else {
+          throw new Error(`Failed to connect Spotify: ${spotifyResponse.status} ${spotifyResponse.statusText}`);
+        }
       }
+
+      const spotifyData = await spotifyResponse.json();
 
       // now create account with Spotify top artists and profile picture
       const signupData = { 
@@ -82,8 +88,17 @@ function Signup() {
         body: JSON.stringify(signupData),
       });
 
+      if (!response.ok) {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          throw new Error(data.error || 'Signup failed');
+        } else {
+          throw new Error(`Signup failed: ${response.status} ${response.statusText}`);
+        }
+      }
+
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
 
       const usersResponse = await fetch(`${API_BASE_URL}/users`);
       if (usersResponse.ok) {

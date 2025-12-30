@@ -44,6 +44,12 @@ function Discover() {
         setLoading(true);
         // const response = await fetch(`${API_BASE_URL}/api/users`);
         const response = await fetch(`${API_BASE_URL}/users`);
+        
+        if (!response.ok) {
+          console.error('Failed to fetch users:', response.status, response.statusText);
+          return;
+        }
+        
         const data = await response.json();
 
         // database includes top artists for each user

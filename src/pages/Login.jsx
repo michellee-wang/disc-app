@@ -26,11 +26,18 @@ function Login() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.error || 'Login failed');
+        // Check if response is JSON before parsing
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          throw new Error(data.error || 'Login failed');
+        } else {
+          throw new Error(`Login failed: ${response.status} ${response.statusText}`);
+        }
       }
+
+      const data = await response.json();
       
       const usersResponse = await fetch(`${API_BASE_URL}/users`);
       if (usersResponse.ok) {
