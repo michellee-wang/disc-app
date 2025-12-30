@@ -27,14 +27,16 @@ function Login() {
       });
 
       if (!response.ok) {
-        // Check if response is JSON before parsing
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const data = await response.json();
-          throw new Error(data.error || 'Login failed');
-        } else {
-          throw new Error(`Login failed: ${response.status} ${response.statusText}`);
+        // Try to parse error message, but handle non-JSON responses
+        let errorMessage = 'Login failed';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          // If parsing fails, use status text
+          errorMessage = response.statusText || errorMessage;
         }
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();

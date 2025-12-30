@@ -62,15 +62,17 @@ function Signup() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code }),
       });
-
+      
       if (!spotifyResponse.ok) {
-        const contentType = spotifyResponse.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const spotifyData = await spotifyResponse.json();
-          throw new Error(spotifyData.error || 'Failed to connect Spotify');
-        } else {
-          throw new Error(`Failed to connect Spotify: ${spotifyResponse.status} ${spotifyResponse.statusText}`);
+        // Try to parse error message, but handle non-JSON responses
+        let errorMessage = 'Failed to connect Spotify';
+        try {
+          const errorData = await spotifyResponse.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          errorMessage = spotifyResponse.statusText || errorMessage;
         }
+        throw new Error(errorMessage);
       }
 
       const spotifyData = await spotifyResponse.json();
@@ -89,13 +91,15 @@ function Signup() {
       });
 
       if (!response.ok) {
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const data = await response.json();
-          throw new Error(data.error || 'Signup failed');
-        } else {
-          throw new Error(`Signup failed: ${response.status} ${response.statusText}`);
+        // Try to parse error message, but handle non-JSON responses
+        let errorMessage = 'Signup failed';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          errorMessage = response.statusText || errorMessage;
         }
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
