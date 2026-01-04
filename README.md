@@ -1,7 +1,5 @@
 # muse 
 
-## for some reason the signup doesnt work ocassionally and i can't reproduce this but im working on fixing it. if it doesnt work try on a different device
-
 muse is a social networking platform that connects people through their music taste. built with React and powered by Spotify, users can discover others with similar musical interests, view their top artists, and save connections.
 
 the server takes a while to start
