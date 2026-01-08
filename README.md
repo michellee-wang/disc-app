@@ -2,8 +2,6 @@
 
 muse is a social networking platform that connects people through their music taste. built with React and powered by Spotify, users can discover others with similar musical interests, view their top artists, and save connections.
 
-the server takes a while to start
-
 ## this was made for [disc club at nu](https://discnu.org)
 part of the assignment was to use a premade api to fetch users so the artists had to be randomly generated. this part was commmented out after supabase auth was added so that users can make their own account
 
